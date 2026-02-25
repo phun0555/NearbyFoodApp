@@ -82,11 +82,18 @@ export default function Home() {
   };
 
 
-  const fetchRestaurants = async () => {
+ const fetchRestaurants = async () => {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+
+    const data = await response.json();
+
     const baseLat = 14.0379;
     const baseLon = 100.6183;
 
-    const mockData = [
+    const customRestaurants = [
       {
         name: "ก๋วยเตี๋ยวเรือรังสิต นวนคร",
         image:
@@ -100,7 +107,7 @@ export default function Home() {
       {
         name: "ชาบูอิ่มอร่อย นวนคร",
         image:
-          "https://image.makewebeasy.net/makeweb/m_1920x0/Ommd4Syoj/Contacts/image.jpg?v=202405291424",
+          "https://image.makewebeasy.net/makeweb/m_1920x0/Ommd4Syoj/Contacts/image.jpg",
       },
       {
         name: "ร้านข้าวมันไก่นวนคร",
@@ -110,7 +117,7 @@ export default function Home() {
       {
         name: "หมูกระทะริมทาง นวนคร",
         image:
-          "https://s.isanook.com/he/0/ud/1/7657/korean-grilled-pork-thai-styl.jpg?ip/crop/w1200h700/q80/webp",
+          "https://s.isanook.com/he/0/ud/1/7657/korean-grilled-pork-thai-styl.jpg",
       },
       {
         name: "ครัวบ้านสวน นวนคร",
@@ -124,26 +131,26 @@ export default function Home() {
       },
     ];
 
-    const formatted = mockData.map((item, i) => ({
-      id: i + 1,
-      name: item.name,
-      image: item.image,
-      rating: (4 + Math.random()).toFixed(1),
-      reviews: Math.floor(Math.random() * 400) + 20,
-      latitude:
-        baseLat + (Math.random() - 0.5) * 0.01,
-      longitude:
-        baseLon + (Math.random() - 0.5) * 0.01,
-    }));
+    const formatted = customRestaurants.map(
+      (item, index) => ({
+        id: index + 1,
+        name: item.name,
+        image: item.image,
+        rating: (4 + Math.random()).toFixed(1),
+        reviews:
+          Math.floor(Math.random() * 300) + 50,
+        latitude:
+          baseLat + (Math.random() - 0.5) * 0.01,
+        longitude:
+          baseLon + (Math.random() - 0.5) * 0.01,
+      })
+    );
 
     setRestaurants(formatted);
-
-    await AsyncStorage.setItem(
-      "restaurants",
-      JSON.stringify(formatted)
-    );
-  };
-
+  } catch (error) {
+    console.log("Fetch error:", error);
+  }
+};
 
   const openGoogleMaps = (
     lat: number,
