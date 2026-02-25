@@ -1,12 +1,12 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Text,
   FlatList,
   Image,
   StyleSheet,
+  Text,
+  View,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
 
 export default function Favorite() {
   const [favorites, setFavorites] = useState<any[]>([]);

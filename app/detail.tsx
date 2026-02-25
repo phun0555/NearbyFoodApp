@@ -19,6 +19,7 @@ export default function Detail() {
         ร้านอาหารบรรยากาศดี เหมาะสำหรับครอบครัว
       </Text>
     </View>
+  
   );
 }
 
