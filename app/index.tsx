@@ -85,7 +85,7 @@ export default function Home() {
  const fetchRestaurants = async () => {
   try {
     const response = await fetch(
-      "https://jsonplaceholder.typicode.com/users"
+      "https://raw.githubusercontent.com/phun0555/NearbyFoodApp/refs/heads/master/app/restaurants.json"
     );
 
     const data = await response.json();
